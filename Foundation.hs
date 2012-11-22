@@ -4,8 +4,6 @@ import Prelude
 import Yesod
 import Yesod.Static
 import Yesod.Auth
-import Yesod.Auth.BrowserId
-import Yesod.Auth.GoogleEmail
 import Yesod.Auth.Email
 import Yesod.Default.Config
 import Yesod.Default.Util (addStaticContentExternal)
@@ -207,7 +205,7 @@ Thank you
         mu <- get uid
         case mu of
             Nothing -> return Nothing
-            Just u -> do
+            Just _ -> do
                 update uid [UserVerified =. True]
                 return $ Just uid
     getPassword = runDB . fmap (join . fmap userPassword) . get
